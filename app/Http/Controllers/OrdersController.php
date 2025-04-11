@@ -15,7 +15,7 @@ class OrdersController extends Controller
         $validated = $request->validated();
         $orders = Order::query();
 
-        if ($validated['search']) {
+        if (!empty($validated['search'])) {
             $orders->where(function ($query) use ($validated) {
                 $query->where('order_number', 'like', '%' . $validated['search'] . '%');
             });
@@ -52,7 +52,7 @@ class OrdersController extends Controller
         $randomStatus = $statuses[array_rand($statuses)];
         $order->status = $randomStatus;
         $order->save();
-        
+
         event(new OrderStatusChanged($order));
 
         return response()->json([
