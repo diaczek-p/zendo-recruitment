@@ -46,7 +46,7 @@ class OrdersController extends Controller
             return response()->json(['error' => 'Nie znaleziono zamówień'], 404);
         }
 
-        $statuses = ['pending', 'processing', 'completed', 'cancelled'];
+        $statuses = ['pending', 'processing', 'completed', 'canceled'];
         $currentStatus = $order->status;
         $statuses = array_diff($statuses, [$currentStatus]);
         $randomStatus = $statuses[array_rand($statuses)];
