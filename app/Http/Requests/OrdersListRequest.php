@@ -25,6 +25,7 @@ class OrdersListRequest extends FormRequest
             'page' => 'nullable|integer|min:1',
             'per_page' => 'nullable|integer|min:1|max:100',
             'search' => 'nullable|string',
+            'min_total_amount' => 'nullable|numeric|min:0',
         ];
     }
 }

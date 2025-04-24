@@ -21,6 +21,10 @@ class OrdersController extends Controller
             });
         }
 
+        if (!empty($validated['min_total_amount'])) {
+            $orders->where('total_amount', '>=', $validated['min_total_amount']);
+        }
+
         $perPage = $validated['per_page'] ?? 10;
         $page = $validated['page'] ?? 1;
         $orders = $orders->paginate($perPage, ['*'], 'page', $page);
